@@ -63,7 +63,7 @@ exports.generatePrivKeyFromMnemonic = void 0;
 var bip32 = __importStar(require("bip32"));
 var bip39 = __importStar(require("bip39"));
 var config_1 = require("../../config/");
-function generatePrivKeyFromMnemonic(mnemonic) {
+function generatePrivKeyFromMnemonic(mnemonic, path) {
     return __awaiter(this, void 0, void 0, function () {
         var seed, node, child;
         return __generator(this, function (_a) {
@@ -72,7 +72,7 @@ function generatePrivKeyFromMnemonic(mnemonic) {
                 case 1:
                     seed = _a.sent();
                     node = bip32.fromSeed(seed);
-                    child = node.derivePath("44'/".concat(config_1.config.slip44.coinType, "'/0'/0/0"));
+                    child = node.derivePath("44'/".concat(path || config_1.config.slip44.coinType, "'/0'/0/0"));
                     return [2 /*return*/, Uint8Array.from(child.privateKey)];
             }
         });

@@ -8,4 +8,4 @@ export declare type PubKey = {
     verify(msg: Uint8Array, sig: Uint8Array): boolean;
     address(): Uint8Array;
 };
-export declare function generatePrivKeyFromMnemonic(mnemonic: string): Promise<Uint8Array>;
+export declare function generatePrivKeyFromMnemonic(mnemonic: string, path?: number): Promise<Uint8Array>;

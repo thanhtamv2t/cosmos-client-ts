@@ -1,9 +1,9 @@
 import * as bip32 from 'bip32';
 import * as bip39 from 'bip39';
 import { config } from '../../config/';
-export async function generatePrivKeyFromMnemonic(mnemonic) {
+export async function generatePrivKeyFromMnemonic(mnemonic, path) {
     const seed = await bip39.mnemonicToSeed(mnemonic);
     const node = bip32.fromSeed(seed);
-    const child = node.derivePath(`44'/${config.slip44.coinType}'/0'/0/0`);
+    const child = node.derivePath(`44'/${path || config.slip44.coinType}'/0'/0/0`);
     return Uint8Array.from(child.privateKey);
 }

@@ -14,10 +14,10 @@ export type PubKey = {
   address(): Uint8Array;
 };
 
-export async function generatePrivKeyFromMnemonic(mnemonic: string) {
+export async function generatePrivKeyFromMnemonic(mnemonic: string, path?: number) {
   const seed = await bip39.mnemonicToSeed(mnemonic);
   const node = bip32.fromSeed(seed);
-  const child = node.derivePath(`44'/${config.slip44.coinType}'/0'/0/0`);
+  const child = node.derivePath(`44'/${path || config.slip44.coinType}'/0'/0/0`);
 
   return Uint8Array.from(child.privateKey!);
 }
